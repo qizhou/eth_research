@@ -3,7 +3,7 @@ from fft import fft
 from multicombs import lincomb
 
 # Generatore for the field
-PRIMITIVE_ROOT = 5
+PRIMITIVE_ROOT = 7
 MODULUS = b.curve_order
 
 assert pow(PRIMITIVE_ROOT, (MODULUS - 1) // 2, MODULUS) != 1
