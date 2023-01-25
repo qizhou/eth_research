@@ -114,13 +114,16 @@ def verify_low_degree_proof(merkle_root, root_of_unity, proof, maxdeg_plus_1, mo
 
             columnvals.append(int.from_bytes(column_values[i], 'big'))
 
-        # Verify for each selected y coordinate that the four points from the
-        # polynomial and the one point from the column that are on that y 
-        # coordinate are on the same deg < 4 polynomial
-        polys = f.multi_interp_4(xcoords, rows)
+        # # Verify for each selected y coordinate that the four points from the
+        # # polynomial and the one point from the column that are on that y 
+        # # coordinate are on the same deg < 4 polynomial
+        # polys = f.multi_interp_4(xcoords, rows)
 
-        for p, c in zip(polys, columnvals):
-            assert f.eval_quartic(p, special_x) == c
+        # for p, c in zip(polys, columnvals):
+        #     assert f.eval_quartic(p, special_x) == c
+        for xs, ys, c in zip(xcoords, rows, columnvals):
+            #  assert f.eval_quartic(p, special_x) == c
+            assert f.eval_barycentric(special_x, xs, ys) == c
 
         # Update constants to check the next proof
         merkle_root = root2
